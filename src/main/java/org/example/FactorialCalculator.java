@@ -1,3 +1,5 @@
+package org.example;
+
 public class FactorialCalculator {
     public int calculateFactorial(int n) {
         if (n < 0) {
