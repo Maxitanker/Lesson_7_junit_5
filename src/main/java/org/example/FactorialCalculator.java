@@ -1,14 +1,15 @@
 package org.example;
 
 public class FactorialCalculator {
-    public int calculateFactorial(int n) {
+
+    public static int factorial(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("Число должно быть неотрицательным.");
         }
-        int factorial = 1;
+        int factorialResult = 1;
         for (int i = 2; i <= n; i++) {
-            factorial *= i;
+            factorialResult *= i;
         }
-        return factorial;
+        return factorialResult;
     }
 }

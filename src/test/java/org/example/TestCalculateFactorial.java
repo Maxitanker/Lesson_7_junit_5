@@ -1,35 +1,26 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestCalculateFactorial {
 
-    @Test
-    public void testCalculateFactorialForPositive() {
-        FactorialCalculator calculator = new FactorialCalculator();
-        int result = calculator.calculateFactorial(5);
-        assertEquals(120, result, "Факториал 5 должен быть равен 120");
+    @DisplayName("Проверка нуля и положительных чисел")
+    @ParameterizedTest
+    @CsvSource({"0, 1", "1, 1", "7, 5040", "13, 1932053504"})
+    public void testFactorialPositive(int n, int expected) {
+        assertEquals(expected, FactorialCalculator.factorial(n));
     }
 
-    @Test
-    public void testCalculateFactorialForZero() {
-        FactorialCalculator calculator = new FactorialCalculator();
-        int result = calculator.calculateFactorial(0);
-        assertEquals(1, result, "Факториал 0 должен быть равен 1");
-    }
-
-    @Test
-    public void testCalculateFactorialForOne() {
-        FactorialCalculator calculator = new FactorialCalculator();
-        int result = calculator.calculateFactorial(1);
-        assertEquals(1, result, "Факториал 1 должен быть равен 1");
-    }
-
-    @Test
-    public void testCalculateFactorialForNegativeNumber() {
-        FactorialCalculator calculator = new FactorialCalculator();
-        assertThrows(IllegalArgumentException.class, () -> calculator.calculateFactorial(-5),
-                "Метод должен выбрасывать исключение для отрицательных чисел");
-    }
-}
+    @DisplayName("Проверка на отрицательные числа")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, -10, -42})
+    public void testFactorialNegative(int n) {
+        assertThrows(IllegalArgumentException.class, () -> FactorialCalculator.factorial(n)
+        );
+     }
+ }
